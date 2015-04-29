@@ -3,6 +3,7 @@
 #include <vector>
 #include <algorithm>
 #include <tuple>
+#include <string>
 
 #include "TGraph.h"
 #include "TGraphErrors.h"
@@ -30,6 +31,12 @@ namespace bene {
 
 	template<typename T, int bins> 
 	TH1F quickHist(const std::vector<T> & v);
+
+	template<typename T, int cols, int X, int Y, int Err>
+	std::vector<std::tuple<T, T, T>> readToVector(const std::string & s);
+
+	template<typename T, int cols, int X, int Y>
+	std::vector<std::tuple<T, T>> readToVector(const std::string & s);
 }
 
 #endif

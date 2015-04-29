@@ -1,4 +1,6 @@
 #include "algorithm.h"
+#include <fstream> 
+#include <sstream>
 
 template<typename T, int X, int Y>
 TGraph bene::quickTGraph(const std::vector<T> & v)
@@ -38,3 +40,41 @@ TH1F bene::quickHist(const std::vector<T> & v)
 		h.Fill(e);
 	}
 }
+
+template<typename T, int cols, int X, int Y, int Err>
+std::vector<std::tuple<T, T, T>>bene::readToVector(const std::string & s)
+{
+	std::ifstream in(s);
+	std::string line;
+	std::vector<std::tuple<T, T, T>> values;
+	while(std::getline(in, line)) {
+		std::stringstream sstr;
+		sstr << line;
+		std::array<T, cols> ary;
+		for(size_t i = 0; i < cols; i++) {
+			sstr >> ary[i];
+		}
+		values.push_back(std::make_tuple(ary[X-1], ary[Y-1], ary[Err-1]));
+	}
+	return values;
+}
+
+
+template<typename T, int cols, int X, int Y>
+std::vector<std::tuple<T, T>>bene::readToVector(const std::string & s)
+{
+	std::ifstream in(s);
+	std::string line;
+	std::vector<std::tuple<T, T>> values;
+	while(std::getline(in, line)) {
+		std::stringstream sstr;
+		sstr << line;
+		std::array<T, cols> ary;
+		for(size_t i = 0; i < cols; i++) {
+			sstr >> ary[i];
+		}
+		values.push_back(std::make_tuple(ary[X-1], ary[Y-1]));
+	}
+	return values;
+}
+
