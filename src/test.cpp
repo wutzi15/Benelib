@@ -4,6 +4,6 @@
 
 int main(int argc, char const *argv[])
 {
-	bene::plotHistFromFile(argv[1]);
-	return 0;
+    bene::plotHistFromFile(argv[1]);
+    return 0;
 }
