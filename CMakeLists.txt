@@ -33,7 +33,7 @@ file(GLOB test_src RELATIVE ${CMAKE_CURRENT_SOURCE_DIR}
 #build the library
 add_library(bene SHARED ${headers} ${sources})
 
-set_target_properties(bene PROPERTIES LINK_FLAGS ${ROOT_LIBS})
+set_target_properties(bene PROPERTIES LINK_FLAGS "${ROOT_LIBS} -lboost_system -lboost_filesystem")
 
 install(TARGETS bene
 		LIBRARY DESTINATION lib)
