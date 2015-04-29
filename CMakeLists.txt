@@ -41,7 +41,7 @@ install(FILES ${headers} DESTINATION include)
 
 option(TESTS "Build Test program " OFF)
 
-if(TESTS)
+if(TESTS) 
 	include_directories(include)
 	add_executable(test_bene ${test_src})
 	link_directories(${CMAKE_CURRENT_SOURCE_DIR})
