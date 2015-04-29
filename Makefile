@@ -192,6 +192,54 @@ lib/algorithm.cpp.s:
 	$(MAKE) -f CMakeFiles/bene.dir/build.make CMakeFiles/bene.dir/lib/algorithm.cpp.s
 .PHONY : lib/algorithm.cpp.s
 
+lib/file.o: lib/file.cpp.o
+.PHONY : lib/file.o
+
+# target to build an object file
+lib/file.cpp.o:
+	$(MAKE) -f CMakeFiles/bene.dir/build.make CMakeFiles/bene.dir/lib/file.cpp.o
+.PHONY : lib/file.cpp.o
+
+lib/file.i: lib/file.cpp.i
+.PHONY : lib/file.i
+
+# target to preprocess a source file
+lib/file.cpp.i:
+	$(MAKE) -f CMakeFiles/bene.dir/build.make CMakeFiles/bene.dir/lib/file.cpp.i
+.PHONY : lib/file.cpp.i
+
+lib/file.s: lib/file.cpp.s
+.PHONY : lib/file.s
+
+# target to generate assembly for a file
+lib/file.cpp.s:
+	$(MAKE) -f CMakeFiles/bene.dir/build.make CMakeFiles/bene.dir/lib/file.cpp.s
+.PHONY : lib/file.cpp.s
+
+lib/quickRoot.o: lib/quickRoot.cpp.o
+.PHONY : lib/quickRoot.o
+
+# target to build an object file
+lib/quickRoot.cpp.o:
+	$(MAKE) -f CMakeFiles/bene.dir/build.make CMakeFiles/bene.dir/lib/quickRoot.cpp.o
+.PHONY : lib/quickRoot.cpp.o
+
+lib/quickRoot.i: lib/quickRoot.cpp.i
+.PHONY : lib/quickRoot.i
+
+# target to preprocess a source file
+lib/quickRoot.cpp.i:
+	$(MAKE) -f CMakeFiles/bene.dir/build.make CMakeFiles/bene.dir/lib/quickRoot.cpp.i
+.PHONY : lib/quickRoot.cpp.i
+
+lib/quickRoot.s: lib/quickRoot.cpp.s
+.PHONY : lib/quickRoot.s
+
+# target to generate assembly for a file
+lib/quickRoot.cpp.s:
+	$(MAKE) -f CMakeFiles/bene.dir/build.make CMakeFiles/bene.dir/lib/quickRoot.cpp.s
+.PHONY : lib/quickRoot.cpp.s
+
 src/test.o: src/test.cpp.o
 .PHONY : src/test.o
 
@@ -233,6 +281,12 @@ help:
 	@echo "... lib/algorithm.o"
 	@echo "... lib/algorithm.i"
 	@echo "... lib/algorithm.s"
+	@echo "... lib/file.o"
+	@echo "... lib/file.i"
+	@echo "... lib/file.s"
+	@echo "... lib/quickRoot.o"
+	@echo "... lib/quickRoot.i"
+	@echo "... lib/quickRoot.s"
 	@echo "... src/test.o"
 	@echo "... src/test.i"
 	@echo "... src/test.s"
