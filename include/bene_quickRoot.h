@@ -5,9 +5,12 @@
 
 namespace bene
 {
-    template<typename T, int X, int Y>
+    template<typename T, size_t X, size_t Y>
     TGraph quickTGraph(const std::vector<std::tuple<T,T>> & v)
     {
+        static_assert(X >= 1, "X must be >= 1. We start counting at 1 for columns!");
+        static_assert(Y >= 1, "Y must be >= 1. We start counting at 1 for columns!");
+        static_assert(std::is_floating_point<T>::value || std::is_integral<T>::value, "vector type must be interger or float");
         const size_t num_elem = v.size();
         TGraph g(num_elem);
 
@@ -18,9 +21,12 @@ namespace bene
         return g;
     }
 
-    template<typename T, int X, int Y>
+    template<typename T, size_t X, size_t Y>
     TGraph quickTGraph(const  std::vector<std::tuple<T,T,T>> & v)
     {
+        static_assert(X >= 1, "X must be >= 1. We start counting at 1 for columns!");
+        static_assert(Y >= 1, "Y must be >= 1. We start counting at 1 for columns!");
+        static_assert(std::is_floating_point<T>::value || std::is_integral<T>::value, "vector type must be interger or float");
         const size_t num_elem = v.size();
         TGraph g(num_elem);
 
@@ -31,9 +37,13 @@ namespace bene
         return g;
     }
 
-    template<typename T, int X, int Y, int Err>
+    template<typename T, size_t X, size_t Y, size_t Err>
     TGraphErrors quickTGraphError(const  std::vector<std::tuple<T,T,T>> & v)
     {
+        static_assert(X >= 1, "X must be >= 1. We start counting at 1 for columns!");
+        static_assert(Y >= 1, "Y must be >= 1. We start counting at 1 for columns!");
+        static_assert(Err >= 1, "Err must be >= 1. We start counting at 1 for columns!");
+        static_assert(std::is_floating_point<T>::value || std::is_integral<T>::value, "vector type must be interger or float");
         const size_t num_elem = v.size();
         TGraphErrors g(num_elem);
 
@@ -45,9 +55,10 @@ namespace bene
         return g;
     }
 
-    template<typename T, int bins>
+    template<typename T, size_t bins>
     TH1F quickHist(const std::vector<T> & v)
     {
+        static_assert(std::is_floating_point<T>::value || std::is_integral<T>::value, "vector type must be interger or float");
         const size_t num_elem = v.size();
         double min_v = min(v);
         double min = min_v < 0 ? min_v * 1.1 : min_v * 0.9;
@@ -60,9 +71,11 @@ namespace bene
         }
     }
 
-    template<typename T, int bins, int col>
+    template<typename T, size_t bins, size_t col>
     TH1F quickHist(const std::vector<std::tuple<T,T>> & v)
     {
+        static_assert(col >= 1, "col must be >= 1. We start counting at 1 for columns!");
+        static_assert(std::is_floating_point<T>::value || std::is_integral<T>::value, "vector type must be interger or float");
         const size_t num_elem = v.size();
         double min_v = min<T,col-1>(v);
         double min = min_v < 0 ? min_v * 1.1 : min_v * 0.9;
@@ -77,9 +90,11 @@ namespace bene
         return h;
     }
 
-    template<typename T, int bins, int col>
+    template<typename T, size_t bins, size_t col>
     TH1F quickHist(const std::vector<std::tuple<T,T,T>> & v)
     {
+        static_assert(col >= 1, "col must be >= 1. We start counting at 1 for columns!");
+        static_assert(std::is_floating_point<T>::value || std::is_integral<T>::value, "vector type must be interger or float");
         const size_t num_elem = v.size();
         double min_v = min<T,col-1>(v);
         double min = min_v < 0 ? min_v * 1.1 : min_v * 0.9;

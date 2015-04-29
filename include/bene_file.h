@@ -43,7 +43,7 @@ namespace bene
         return values;
     }
 
-    template<typename T, int cols, int X, int Y>
+    template<typename T, size_t cols, size_t X, size_t Y>
     std::vector<std::tuple<T, T>> readToVector(const std::string & s)
     {
         static_assert(X <= cols, "X value must be < cols");
