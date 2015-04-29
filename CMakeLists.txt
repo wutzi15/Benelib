@@ -39,7 +39,7 @@ install(TARGETS bene
 		LIBRARY DESTINATION lib)
 install(FILES ${headers} DESTINATION include)
 
-option(TESTS "Build Test program " ON)
+option(TESTS "Build Test program " OFF)
 
 if(TESTS)
 	include_directories(include)
