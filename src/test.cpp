@@ -4,6 +4,6 @@
 
 int main(int argc, char const *argv[])
 {
-    bene::plotHistFromFile(argv[1]);
+    auto v = bene::readToVector<double, 3,1,2,3>(argv[1]);
     return 0;
 }

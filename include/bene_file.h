@@ -8,6 +8,7 @@
 #include <sstream>
 #include <iostream>
 #include <limits>
+#include <type_traits>
 
 #include "TGraph.h"
 #include "TGraphErrors.h"
@@ -16,9 +17,13 @@
 
 namespace bene
 {
-    template<typename T, int cols, int X, int Y, int Err>
+    template<typename T, size_t cols, size_t X, size_t Y, size_t Err>
     std::vector<std::tuple<T, T, T>> readToVector(const std::string & s)
     {
+        static_assert(X <= cols, "X value must be < cols");
+        static_assert(Y <= cols, "Y value must be < cols");
+        static_assert(Err <= cols, "Y value must be < cols");
+        static_assert(std::is_floating_point<T>::value || std::is_integral<T>::value, "vector type must be interger or float");
         std::ifstream in(s);
         std::string line;
         std::vector<std::tuple<T, T, T>> values;
@@ -41,6 +46,9 @@ namespace bene
     template<typename T, int cols, int X, int Y>
     std::vector<std::tuple<T, T>> readToVector(const std::string & s)
     {
+        static_assert(X <= cols, "X value must be < cols");
+        static_assert(Y <= cols, "Y value must be < cols");
+        static_assert(std::is_floating_point<T>::value || std::is_integral<T>::value, "vector type must be interger or float");
         std::ifstream in(s);
         std::string line;
         std::vector<std::tuple<T, T>> values;
