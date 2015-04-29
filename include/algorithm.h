@@ -13,12 +13,12 @@
 namespace bene {
 	
 	template<typename T>
-	T min(const std::vector<T> &v){
+	inline T min(const std::vector<T> &v){
 		return *std::min_element(v.begin(), v.end());
 	}
 
 	template<typename T>
-	T max(const std::vector<T> &v){
+	inline T max(const std::vector<T> &v){
 		return *std::max_element(v.begin(), v.end());
 	}
 
