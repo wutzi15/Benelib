@@ -155,6 +155,19 @@ bene/fast:
 	$(MAKE) -f CMakeFiles/bene.dir/build.make CMakeFiles/bene.dir/build
 .PHONY : bene/fast
 
+#=============================================================================
+# Target rules for targets named test_bene
+
+# Build rule for target.
+test_bene: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test_bene
+.PHONY : test_bene
+
+# fast build rule for target.
+test_bene/fast:
+	$(MAKE) -f CMakeFiles/test_bene.dir/build.make CMakeFiles/test_bene.dir/build
+.PHONY : test_bene/fast
+
 lib/algorithm.o: lib/algorithm.cpp.o
 .PHONY : lib/algorithm.o
 
@@ -179,6 +192,30 @@ lib/algorithm.cpp.s:
 	$(MAKE) -f CMakeFiles/bene.dir/build.make CMakeFiles/bene.dir/lib/algorithm.cpp.s
 .PHONY : lib/algorithm.cpp.s
 
+src/test.o: src/test.cpp.o
+.PHONY : src/test.o
+
+# target to build an object file
+src/test.cpp.o:
+	$(MAKE) -f CMakeFiles/test_bene.dir/build.make CMakeFiles/test_bene.dir/src/test.cpp.o
+.PHONY : src/test.cpp.o
+
+src/test.i: src/test.cpp.i
+.PHONY : src/test.i
+
+# target to preprocess a source file
+src/test.cpp.i:
+	$(MAKE) -f CMakeFiles/test_bene.dir/build.make CMakeFiles/test_bene.dir/src/test.cpp.i
+.PHONY : src/test.cpp.i
+
+src/test.s: src/test.cpp.s
+.PHONY : src/test.s
+
+# target to generate assembly for a file
+src/test.cpp.s:
+	$(MAKE) -f CMakeFiles/test_bene.dir/build.make CMakeFiles/test_bene.dir/src/test.cpp.s
+.PHONY : src/test.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -190,11 +227,15 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... install"
 	@echo "... list_install_components"
+	@echo "... test_bene"
 	@echo "... bene"
 	@echo "... install/local"
 	@echo "... lib/algorithm.o"
 	@echo "... lib/algorithm.i"
 	@echo "... lib/algorithm.s"
+	@echo "... src/test.o"
+	@echo "... src/test.i"
+	@echo "... src/test.s"
 .PHONY : help
 
 

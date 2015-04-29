@@ -26,6 +26,8 @@ file(GLOB sources RELATIVE ${CMAKE_CURRENT_SOURCE_DIR}
      lib/*.cpp)
 file(GLOB headers RELATIVE ${CMAKE_CURRENT_SOURCE_DIR}
      include/*.h)
+file(GLOB test_src RELATIVE ${CMAKE_CURRENT_SOURCE_DIR}
+	src/*.cpp)
 
 
 #build the library
@@ -36,3 +38,12 @@ set_target_properties(bene PROPERTIES LINK_FLAGS ${ROOT_LIBS})
 install(TARGETS bene
 		LIBRARY DESTINATION lib)
 install(FILES ${headers} DESTINATION include)
+
+option(TESTS "Build Test program " ON)
+
+if(TESTS)
+	include_directories(include)
+	add_executable(test_bene ${test_src})
+	link_directories(${CMAKE_CURRENT_SOURCE_DIR})
+	target_link_libraries(test_bene bene ${ROOT_LIBS})
+endif()
