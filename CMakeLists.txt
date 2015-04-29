@@ -3,7 +3,7 @@ project(Benelib)
 
 set(CMAKE_C_COMPILER gcc)
 set(CMAKE_CXX_COMPILER g++)
-
+set(CMAKE_INSTALL_PREFIX /usr)
 #get ROOT flags for the programs not the lib
 EXEC_PROGRAM(root-config ARGS --libs OUTPUT_VARIABLE ROOT_LIBS)
 EXEC_PROGRAM(root-config ARGS --libdir OUTPUT_VARIABLE ROOT_LIB_DIR)
