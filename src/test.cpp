@@ -19,6 +19,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 int main(int argc, char const *argv[])
 {
-    auto v = bene::readToVector<double, 3,1,2,3>(argv[1]);
+	auto v = bene::readToVector<double,3,1,2,3>(argv[1]);
+    auto g = bene::quickTGraphError<double, 1,2,3>(v);
+    bene::fit<1>(g);
     return 0;
 }

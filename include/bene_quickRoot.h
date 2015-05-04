@@ -16,10 +16,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #ifndef BENE_QUICKROOT
 #define BENE_QUICKROOT
 #include "bene_algorithm.h"
+#include "boost/lexical_cast.hpp"
 #include <tuple>
 
 namespace bene
 {
+
+
     template<typename T, size_t X, size_t Y>
     TGraph quickTGraph(const std::vector<std::tuple<T,T>> & v)
     {
@@ -123,5 +126,30 @@ namespace bene
 
         return h;
     }
+
+    template<size_t deg>
+    TGraphErrors fit(TGraphErrors &g)
+    {
+        g.Fit(("pol"+boost::lexical_cast<std::string>(deg)).c_str(),"EMFSQ");
+        g.Draw("AL");
+    }
+
+    template<size_t deg>
+    TGraph fit(TGraph &g)
+    {
+        g.Fit(("pol"+boost::lexical_cast<std::string>(deg)).c_str(),"EMFSQ");
+        g.Draw("AL");
+    }
+
+    template<size_t deg>
+    TH1F fit(TH1F &g)
+    {
+        g.Fit(("pol"+boost::lexical_cast<std::string>(deg)).c_str(),"EMFSQ");
+        g.Draw();
+    }
+
+    TGraphErrors fit(TGraphErrors &g);
+    TGraph fit(TGraph &g);
+    TH1F fit(TH1F &g);
 }
 #endif
