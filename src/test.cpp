@@ -15,12 +15,22 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 #include "bene.h"
 #include <iostream>
-#include "TCanvas.h"
+
 
 int main(int argc, char const *argv[])
 {
-	auto v = bene::readToVector<double,3,1,2,3>(argv[1]);
-    auto g = bene::quickTGraphError<double, 1,2,3>(v);
-    bene::fit<1>(g);
+	std::tuple<int, long> t1{ 1, 2 };
+    std::tuple<> t2;
+    std::tuple<float, double, long double> t3{ 3, 4, 5 };
+    std::pair<void const*, char const*> t4{ "pv", "test" };
+
+    using expected = std::tuple<int, long, float, double, long double,
+        void const*, char const*>;
+
+    auto result = ::tuple_cat( t1, t2, t3, t4 );
+
+    static_assert( std::is_same<decltype(result), expected>::value, "" );
+
+    print_tuple( result );
     return 0;
 }
