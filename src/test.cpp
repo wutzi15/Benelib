@@ -19,7 +19,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 int main(int argc, char const *argv[])
 {
-	std::tuple<int, long> t1{ 1, 2 };
+	/*std::tuple<int, long> t1{ 1, 2 };
     std::tuple<> t2;
     std::tuple<float, double, long double> t3{ 3, 4, 5 };
     std::pair<void const*, char const*> t4{ "pv", "test" };
@@ -31,6 +31,7 @@ int main(int argc, char const *argv[])
 
     static_assert( std::is_same<decltype(result), expected>::value, "" );
 
-    print_tuple( result );
+    print_tuple( result );*/
+    bene::plotTGraphErrorsFromFile(argv[1]);
     return 0;
 }
