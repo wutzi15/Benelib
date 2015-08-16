@@ -30,6 +30,7 @@ TH1F bene::plotHistFromFile(const std::string & s)
     TCanvas c("","", 500, 500);
     h.Draw();
     c.Print((s+".pdf").c_str());
+    return h;
 }
 
 TGraph bene::plotTGraphFromFile(const std::string & s)
@@ -44,6 +45,7 @@ TGraph bene::plotTGraphFromFile(const std::string & s)
     TCanvas c("","", 500, 500);
     g.Draw("AL");
     c.Print((s+".pdf").c_str());
+    return g;
 }
 
 TGraphErrors bene::plotTGraphErrorsFromFile(const std::string & s)
@@ -58,4 +60,5 @@ TGraphErrors bene::plotTGraphErrorsFromFile(const std::string & s)
     TCanvas c("","", 500, 500);
     g.Draw("AL");
     c.Print((s+".pdf").c_str());
+    return g;
 }

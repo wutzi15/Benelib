@@ -31,6 +31,7 @@ void run()
     std::cout << "Thread 2: " << &hello << " : " << &hello2 << std::endl;
 }
 
+
 int main(int argc, char const *argv[])
 {
 	std::cout <<"Beginning of main\n";
@@ -39,5 +40,6 @@ int main(int argc, char const *argv[])
     Hello& hello2 = bene::Singleton<Hello>::instance();
     std::cout << "Thread 1: " << &hello << " : " << &hello2 << std::endl;
     thread.join();
+
     return 0;
 }

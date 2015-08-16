@@ -17,6 +17,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define BENE_QUICKROOT
 #include "bene_algorithm.h"
 #include "boost/lexical_cast.hpp"
+#include "bene_file.h"
+#include "TCanvas.h"
 #include <tuple>
 
 namespace bene
@@ -151,5 +153,6 @@ namespace bene
     TGraphErrors fit(TGraphErrors &g);
     TGraph fit(TGraph &g);
     TH1F fit(TH1F &g);
+
 }
 #endif

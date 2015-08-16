@@ -14,7 +14,7 @@ EXEC_PROGRAM(root-config ARGS --cflags OUTPUT_VARIABLE ROOT_FLAGS)
 string(REPLACE "-stdlib=libc++" " " ROOT_LIBS ${ROOT_LIBS})
 string(REPLACE "-stdlib=libc++" " " ROOT_FLAGS ${ROOT_FLAGS})
 
-set(CMAKE_CXX_FLAGS "-O2 ${ROOT_FLAGS}" )
+set(CMAKE_CXX_FLAGS "-O2 ${ROOT_FLAGS} -std=c++1y" )
 
 
 include_directories(include)
