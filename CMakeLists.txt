@@ -40,10 +40,16 @@ install(TARGETS bene
 install(FILES ${headers} DESTINATION include)
 
 option(TESTS "Build Test program " OFF)
+option(BOOST_SINGLETON "Use BOOST to build the singleton" OFF)
 
 if(TESTS) 
 	include_directories(include)
 	add_executable(test_bene ${test_src})
 	link_directories(${CMAKE_CURRENT_SOURCE_DIR})
-	target_link_libraries(test_bene bene ${ROOT_LIBS})
+	if(BOOST_SINGLETON)
+		add_definitions(-DBENE_BOOST_SINGLETON)
+		target_link_libraries(test_bene bene boost_system boost_thread ${ROOT_LIBS})
+	else()
+		target_link_libraries(test_bene bene ${ROOT_LIBS})
+	endif()
 endif()

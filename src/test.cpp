@@ -15,22 +15,29 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 #include "bene.h"
 #include <iostream>
+#include <thread>
 
+
+struct Hello
+{
+    Hello(){std::cout << "Hello!\n";};
+    ~Hello(){std::cout << "Goodbye!\n";};    
+};
+
+void run()
+{
+    Hello& hello = bene::Singleton<Hello>::instance();
+    Hello& hello2 = bene::Singleton<Hello>::instance();
+    std::cout << "Thread 2: " << &hello << " : " << &hello2 << std::endl;
+}
 
 int main(int argc, char const *argv[])
 {
-	std::tuple<int, long> t1{ 1, 2 };
-    std::tuple<> t2;
-    std::tuple<float, double, long double> t3{ 3, 4, 5 };
-    std::pair<void const*, char const*> t4{ "pv", "test" };
-
-    using expected = std::tuple<int, long, float, double, long double,
-        void const*, char const*>;
-
-    auto result = ::tuple_cat( t1, t2, t3, t4 );
-
-    static_assert( std::is_same<decltype(result), expected>::value, "" );
-
-    print_tuple( result );
+	std::cout <<"Beginning of main\n";
+    std::thread thread = std::thread(&run);
+    Hello& hello = bene::Singleton<Hello>::instance();
+    Hello& hello2 = bene::Singleton<Hello>::instance();
+    std::cout << "Thread 1: " << &hello << " : " << &hello2 << std::endl;
+    thread.join();
     return 0;
 }
