@@ -1,11 +1,11 @@
 #ifndef BENE_FILE
 #define BENE_FILE
-#include <vector>
 #include <algorithm>
-#include <tuple>
-#include <string>
 #include <fstream>
 #include <sstream>
+#include <string>
+#include <tuple>
+#include <vector>
 /*
 Copyright Benedikt Bergenthal <b.bergenthal@cern.ch> 2015
 This program is free software: you can redistribute it and/or modify
@@ -30,62 +30,61 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "TH1F.h"
 #include "TROOT.h"
 
-namespace bene
+namespace bene {
+template <typename T, size_t cols, size_t X, size_t Y, size_t Err>
+std::vector<std::tuple<T, T, T> > readToVector(const std::string& s)
 {
-    template<typename T, size_t cols, size_t X, size_t Y, size_t Err>
-    std::vector<std::tuple<T, T, T>> readToVector(const std::string & s)
-    {
-        static_assert(X <= cols, "X value must be < cols");
-        static_assert(Y <= cols, "Y value must be < cols");
-        static_assert(Err <= cols, "Y value must be < cols");
-        static_assert(std::is_floating_point<T>::value || std::is_integral<T>::value, "vector type must be interger or float");
-        std::ifstream in(s);
-        std::string line;
-        std::vector<std::tuple<T, T, T>> values;
+    static_assert(X <= cols, "X value must be < cols");
+    static_assert(Y <= cols, "Y value must be < cols");
+    static_assert(Err <= cols, "Y value must be < cols");
+    static_assert(std::is_floating_point<T>::value || std::is_integral<T>::value, "vector type must be interger or float");
+    std::ifstream in(s);
+    std::string line;
+    std::vector<std::tuple<T, T, T> > values;
 
-        while(std::getline(in, line)) {
-            std::stringstream sstr;
-            sstr << line;
-            std::array<T, cols> ary;
+    while (std::getline(in, line)) {
+        std::stringstream sstr;
+        sstr << line;
+        std::array<T, cols> ary;
 
-            for(size_t i = 0; i < cols; i++) {
-                sstr >> ary[i];
-            }
-
-            values.push_back(std::make_tuple(ary[X-1], ary[Y-1], ary[Err-1]));
+        for (size_t i = 0; i < cols; i++) {
+            sstr >> ary[i];
         }
 
-        return values;
+        values.push_back(std::make_tuple(ary[X - 1], ary[Y - 1], ary[Err - 1]));
     }
 
-    template<typename T, size_t cols, size_t X, size_t Y>
-    std::vector<std::tuple<T, T>> readToVector(const std::string & s)
-    {
-        static_assert(X <= cols, "X value must be < cols");
-        static_assert(Y <= cols, "Y value must be < cols");
-        static_assert(std::is_floating_point<T>::value || std::is_integral<T>::value, "vector type must be interger or float");
-        std::ifstream in(s);
-        std::string line;
-        std::vector<std::tuple<T, T>> values;
+    return values;
+}
 
-        while(std::getline(in, line)) {
-            std::stringstream sstr;
-            sstr << line;
-            std::array<T, cols> ary;
+template <typename T, size_t cols, size_t X, size_t Y>
+std::vector<std::tuple<T, T> > readToVector(const std::string& s)
+{
+    static_assert(X <= cols, "X value must be < cols");
+    static_assert(Y <= cols, "Y value must be < cols");
+    static_assert(std::is_floating_point<T>::value || std::is_integral<T>::value, "vector type must be interger or float");
+    std::ifstream in(s);
+    std::string line;
+    std::vector<std::tuple<T, T> > values;
 
-            for(size_t i = 0; i < cols; i++) {
-                sstr >> ary[i];
-            }
+    while (std::getline(in, line)) {
+        std::stringstream sstr;
+        sstr << line;
+        std::array<T, cols> ary;
 
-            values.push_back(std::make_tuple(ary[X-1], ary[Y-1]));
+        for (size_t i = 0; i < cols; i++) {
+            sstr >> ary[i];
         }
 
-        return values;
+        values.push_back(std::make_tuple(ary[X - 1], ary[Y - 1]));
     }
 
-    TH1F plotHistFromFile(const std::string & s);
-    TGraph plotTGraphFromFile(const std::string & s);
-    TGraphErrors plotTGraphErrorsFromFile(const std::string & s);
+    return values;
+}
+
+TH1F plotHistFromFile(const std::string& s);
+TGraph plotTGraphFromFile(const std::string& s);
+TGraphErrors plotTGraphErrorsFromFile(const std::string& s);
 }
 
 #endif

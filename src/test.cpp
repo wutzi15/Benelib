@@ -17,11 +17,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <iostream>
 #include <thread>
 
-
-struct Hello
-{
-    Hello(){std::cout << "Hello!\n";};
-    ~Hello(){std::cout << "Goodbye!\n";};    
+struct Hello {
+    Hello() { std::cout << "Hello!\n"; };
+    ~Hello() { std::cout << "Goodbye!\n"; };
 };
 
 void run()
@@ -31,10 +29,9 @@ void run()
     std::cout << "Thread 2: " << &hello << " : " << &hello2 << std::endl;
 }
 
-
-int main(int argc, char const *argv[])
+int main(int argc, char const* argv[])
 {
-	std::cout <<"Beginning of main\n";
+    std::cout << "Beginning of main\n";
     std::thread thread = std::thread(&run);
     Hello& hello = bene::Singleton<Hello>::instance();
     Hello& hello2 = bene::Singleton<Hello>::instance();

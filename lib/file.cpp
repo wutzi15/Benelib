@@ -14,51 +14,51 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 #include "bene_file.h"
-#include "bene_quickRoot.h"
 #include "TCanvas.h"
+#include "bene_quickRoot.h"
 #include "boost/filesystem.hpp"
 
-TH1F bene::plotHistFromFile(const std::string & s)
+TH1F bene::plotHistFromFile(const std::string& s)
 {
-    if(!boost::filesystem::exists(boost::filesystem::path(s))) {
-        std::cerr <<  __PRETTY_FUNCTION__ << std::endl;
+    if (!boost::filesystem::exists(boost::filesystem::path(s))) {
+        std::cerr << __PRETTY_FUNCTION__ << std::endl;
         std::cerr << "File to open (" << s << ") does not exist\n";
         return TH1F();
     }
     auto v = bene::readToVector<double, 3, 1, 2>(s);
-    auto h = bene::quickHist<double, 100,2>(v);
-    TCanvas c("","", 500, 500);
+    auto h = bene::quickHist<double, 100, 2>(v);
+    TCanvas c("", "", 500, 500);
     h.Draw();
-    c.Print((s+".pdf").c_str());
+    c.Print((s + ".pdf").c_str());
     return h;
 }
 
-TGraph bene::plotTGraphFromFile(const std::string & s)
+TGraph bene::plotTGraphFromFile(const std::string& s)
 {
-    if(!boost::filesystem::exists(boost::filesystem::path(s))) {
-        std::cerr <<  __PRETTY_FUNCTION__ << std::endl;
+    if (!boost::filesystem::exists(boost::filesystem::path(s))) {
+        std::cerr << __PRETTY_FUNCTION__ << std::endl;
         std::cerr << "File to open (" << s << ") does not exist\n";
         return TGraph();
     }
     auto v = bene::readToVector<double, 3, 1, 2>(s);
-    auto g = bene::quickTGraph<double, 1,2>(v);
-    TCanvas c("","", 500, 500);
+    auto g = bene::quickTGraph<double, 1, 2>(v);
+    TCanvas c("", "", 500, 500);
     g.Draw("AL");
-    c.Print((s+".pdf").c_str());
+    c.Print((s + ".pdf").c_str());
     return g;
 }
 
-TGraphErrors bene::plotTGraphErrorsFromFile(const std::string & s)
+TGraphErrors bene::plotTGraphErrorsFromFile(const std::string& s)
 {
-    if(!boost::filesystem::exists(boost::filesystem::path(s))) {
-        std::cerr <<  __PRETTY_FUNCTION__ << std::endl;
+    if (!boost::filesystem::exists(boost::filesystem::path(s))) {
+        std::cerr << __PRETTY_FUNCTION__ << std::endl;
         std::cerr << "File to open (" << s << ") does not exist\n";
         return TGraphErrors();
     }
-    auto v = bene::readToVector<double, 3, 1, 2,3>(s);
-    auto g = bene::quickTGraphError<double, 1,2,3>(v);
-    TCanvas c("","", 500, 500);
+    auto v = bene::readToVector<double, 3, 1, 2, 3>(s);
+    auto g = bene::quickTGraphError<double, 1, 2, 3>(v);
+    TCanvas c("", "", 500, 500);
     g.Draw("AL");
-    c.Print((s+".pdf").c_str());
+    c.Print((s + ".pdf").c_str());
     return g;
 }

@@ -17,105 +17,100 @@
 
 #ifdef BENE_BOOST_SINGLETON
 
-#include <boost/scoped_ptr.hpp>
-#include <boost/thread/once.hpp>
-#include <boost/thread.hpp>
-#include <boost/thread/tss.hpp>
 #include <boost/noncopyable.hpp>
+#include <boost/scoped_ptr.hpp>
+#include <boost/thread.hpp>
+#include <boost/thread/once.hpp>
+#include <boost/thread/tss.hpp>
 
-namespace bene_detail
-{
-	template<typename T, template<typename U> class P>
-	class SingletonImpl;
+namespace bene_detail {
+template <typename T, template <typename U> class P>
+class SingletonImpl;
 
-	template<typename T, template<typename U> class pointer_type>
-	class SingletonBase
-	{
-	protected: 
-		static T& reference(boost::once_flag & flag)
-		{
-			boost::call_once(&SingletonBase::create, flag);
-			return *pointer;
-		}
+template <typename T, template <typename U> class pointer_type>
+class SingletonBase {
+protected:
+    static T& reference(boost::once_flag& flag)
+    {
+        boost::call_once(&SingletonBase::create, flag);
+        return *pointer;
+    }
 
-		static void create(void)
-		{
-			pointer.reset(new T());
-		}
+    static void create(void)
+    {
+        pointer.reset(new T());
+    }
 
-		static boost::scoped_ptr<T> pointer;
-	};
+    static boost::scoped_ptr<T> pointer;
+};
 
-	template<typename T, template<typename U> class P>
-	boost::scoped_ptr<T> SingletonBase<T,P>::pointer;
+template <typename T, template <typename U> class P>
+boost::scoped_ptr<T> SingletonBase<T, P>::pointer;
 
-	template<typename T>
-	class SingletonImpl<T, boost::scoped_ptr>
-		: public SingletonBase<T, boost::scoped_ptr>
-	{
-	public:
-		static T& instance(void)
-		{
-			return SingletonImpl::reference(*once_flag_ptr);
-		}
+template <typename T>
+class SingletonImpl<T, boost::scoped_ptr>
+    : public SingletonBase<T, boost::scoped_ptr> {
+public:
+    static T& instance(void)
+    {
+        return SingletonImpl::reference(*once_flag_ptr);
+    }
 
-	protected:
-		static boost::scoped_ptr<boost::once_flag> once_flag_ptr;
-	};
+protected:
+    static boost::scoped_ptr<boost::once_flag> once_flag_ptr;
+};
 
-	template<typename T>
-	boost::scoped_ptr<boost::once_flag>
-	SingletonImpl<T, boost::scoped_ptr>::once_flag_ptr(new boost::once_flag());
+template <typename T>
+boost::scoped_ptr<boost::once_flag>
+    SingletonImpl<T, boost::scoped_ptr>::once_flag_ptr(new boost::once_flag());
 
-	template<typename T>
-	class SingletonImpl<T, boost::thread_specific_ptr>
-		:public SingletonBase<T, boost::thread_specific_ptr>
-	{
-	public:
-		static T& instance(void)
-		{
-			if(!once_flag_ptr.get()){
-				once_flag_ptr.reset(new boost::once_flag());
-			}
+template <typename T>
+class SingletonImpl<T, boost::thread_specific_ptr>
+    : public SingletonBase<T, boost::thread_specific_ptr> {
+public:
+    static T& instance(void)
+    {
+        if (!once_flag_ptr.get()) {
+            once_flag_ptr.reset(new boost::once_flag());
+        }
 
-			return SingletonImpl::reference(*once_flag_ptr);
-		}
+        return SingletonImpl::reference(*once_flag_ptr);
+    }
 
-	protected:
-		static boost::thread_specific_ptr<boost::once_flag> once_flag_ptr;
-	};
+protected:
+    static boost::thread_specific_ptr<boost::once_flag> once_flag_ptr;
+};
 
-	template<typename T>
-	boost::thread_specific_ptr<boost::once_flag>
-	SingletonImpl<T, boost::thread_specific_ptr>::once_flag_ptr;
+template <typename T>
+boost::thread_specific_ptr<boost::once_flag>
+    SingletonImpl<T, boost::thread_specific_ptr>::once_flag_ptr;
 }
 
-namespace bene
-{
-	template<typename T>
-	class Singleton : public bene_detail::SingletonImpl<T, boost::scoped_ptr>{};
+namespace bene {
+template <typename T>
+class Singleton : public bene_detail::SingletonImpl<T, boost::scoped_ptr> {
+};
 
-	template<typename T>
-	class ThreadSingleton : public bene_detail::SingletonImpl<T, boost::thread_specific_ptr>{};
+template <typename T>
+class ThreadSingleton : public bene_detail::SingletonImpl<T, boost::thread_specific_ptr> {
+};
 }
 
 #else
 
-namespace bene
-{
-	template<typename T>
-	class Singleton
-	{
-	public:
-		static T& instance(void)
-		{
-			static T singleton;
-			return singleton;
-		}
+namespace bene {
+template <typename T>
+class Singleton {
+public:
+    static T& instance(void)
+    {
+        static T singleton;
+        return singleton;
+    }
 
-	private:
-		Singleton(void);
-	};
+private:
+    Singleton(void);
+};
 }
 #endif // BENE_SINGLETON_BOOST
 

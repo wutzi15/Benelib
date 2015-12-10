@@ -16,21 +16,20 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "bene_quickRoot.h"
 #include "bene_file.h"
 
-
-TGraphErrors bene::fit(TGraphErrors &g)
+TGraphErrors bene::fit(TGraphErrors& g)
 {
-	g.Fit("gaus","EMFSQ");
-	g.Draw("AL");
+    g.Fit("gaus", "EMFSQ");
+    g.Draw("AL");
 }
 
-TGraph bene::fit(TGraph &g)
+TGraph bene::fit(TGraph& g)
 {
-	g.Fit("gaus","EMFSQ");
-	g.Draw("AL");
+    g.Fit("gaus", "EMFSQ");
+    g.Draw("AL");
 }
 
-TH1F bene::fit(TH1F &g)
+TH1F bene::fit(TH1F& g)
 {
-	g.Fit("gaus","EMFSQ");
-	g.Draw();
+    g.Fit("gaus", "EMFSQ");
+    g.Draw();
 }
