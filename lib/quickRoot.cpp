@@ -20,16 +20,19 @@ TGraphErrors bene::fit(TGraphErrors& g)
 {
     g.Fit("gaus", "EMFSQ");
     g.Draw("AL");
+    return g;
 }
 
 TGraph bene::fit(TGraph& g)
 {
     g.Fit("gaus", "EMFSQ");
     g.Draw("AL");
+    return g;
 }
 
 TH1F bene::fit(TH1F& g)
 {
     g.Fit("gaus", "EMFSQ");
     g.Draw();
+    return g;
 }
