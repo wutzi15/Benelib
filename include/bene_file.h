@@ -1,5 +1,4 @@
-#ifndef BENE_FILE
-#define BENE_FILE
+#pragma once
 #include <algorithm>
 #include <fstream>
 #include <sstream>
@@ -86,5 +85,3 @@ TH1F plotHistFromFile(const std::string& s);
 TGraph plotTGraphFromFile(const std::string& s);
 TGraphErrors plotTGraphErrorsFromFile(const std::string& s);
 }
-
-#endif

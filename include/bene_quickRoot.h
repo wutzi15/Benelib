@@ -13,8 +13,7 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-#ifndef BENE_QUICKROOT
-#define BENE_QUICKROOT
+#pragma once
 #include "TCanvas.h"
 #include "bene_algorithm.h"
 #include "bene_file.h"
@@ -152,4 +151,3 @@ TGraphErrors fit(TGraphErrors& g);
 TGraph fit(TGraph& g);
 TH1F fit(TH1F& g);
 }
-#endif

@@ -1,5 +1,4 @@
-#ifndef BENE_META_H
-#define BENE_META_H
+#pragma once
 #include <iostream>
 #include <tuple>
 #include <type_traits>
@@ -319,5 +318,3 @@ using mp_count_if = typename mp_count_if_impl<L, P>::type;
 
 template <class L, class V>
 using mp_contains = mp_bool<mp_count<L, V>::value != 0>;
-
-#endif

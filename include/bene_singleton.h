@@ -1,5 +1,4 @@
-#ifndef BENE_SINGLETON
-#define BENE_SINGLETON
+#pragma once
 // Copyright (C) 2015 Joe Ruether jrruethe@gmail.com
 //
 // This program is free software: you can redistribute it and/or modify
@@ -113,5 +112,3 @@ private:
 };
 }
 #endif // BENE_SINGLETON_BOOST
-
-#endif //BENE_SINGLETON
