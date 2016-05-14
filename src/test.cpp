@@ -39,5 +39,6 @@ int main(int argc, char const* argv[])
     std::cout << "Thread 1: " << &hello << " : " << &hello2 << std::endl;
     thread.join();
 
+    
     return 0;
 }
