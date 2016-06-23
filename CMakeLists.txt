@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.0)
+cmake_minimum_required(VERSION 2.8)
 project(Benelib)
 
 set(CMAKE_C_COMPILER gcc)
@@ -41,6 +41,12 @@ install(FILES ${headers} DESTINATION include)
 
 option(TESTS "Build Test program " OFF)
 option(BOOST_SINGLETON "Use BOOST to build the singleton" OFF)
+option(PARALLEL_OMP "Build OMP version" OFF)
+
+if(PARALLEL_OMP)
+	set(CMAKE_CXX_FLAGS "-DBENE_OMP -fopenmp ${CMAKE_CXX_FLAGS}")
+	set(CMAKE_EXE_LINKER_FLAGS "-fopenmp -lpthread ${CMAKE_EXE_LINKER_FLAGS}")
+endif()
 
 if(TESTS) 
 	include_directories(include)
