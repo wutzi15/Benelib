@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <iostream>
 #include <thread>
 
+
 struct Hello {
     Hello() { std::cout << "Hello!\n"; };
     ~Hello() { std::cout << "Goodbye!\n"; };
@@ -38,5 +39,6 @@ int main(int argc, char const* argv[])
     std::cout << "Thread 1: " << &hello << " : " << &hello2 << std::endl;
     thread.join();
 
+    
     return 0;
 }
