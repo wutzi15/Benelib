@@ -20,3 +20,5 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "bene_meta.h"
 #include "bene_singleton.h"
 #include "bene_randomRoot.h"
+#include "bene_statistics.h"
+#include "bene_parallel.h"

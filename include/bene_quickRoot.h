@@ -38,6 +38,63 @@ TGraph quickTGraph(const std::vector<std::tuple<T, T> >& v)
     return g;
 }
 
+template <typename T>
+TGraph quickTGraph(const std::vector<T>& x, const std::vector<T>& y)
+{
+    //assert(x.size() == y.size());
+    const size_t N = x.size();
+    TGraph g(N);
+    for (size_t i = 0; i < N; i++) {
+        g.SetPoint(i, x[i], y[i]);
+    }
+    return g;
+}
+
+template <typename T>
+TGraphErrors quickTGraphError(const std::vector<T>& x, std::vector<T>& xerr, const std::vector<T>& y, const std::vector<T>& yerr)
+{
+    //assert({x.size() == y.size() } == {(xerr.size() == yerr.size() });
+    const size_t num_elem = x.size();
+    TGraphErrors g(num_elem);
+
+    for (size_t i = 0; i < num_elem; ++i) {
+        g.SetPoint(i, x[i], y[i]);
+        g.SetPointError(i, xerr[i], yerr[i]);
+    }
+
+    return g;
+}
+
+template <typename T>
+TGraphErrors quickTGraphXError(const std::vector<T>& x, std::vector<T>& xerr, const std::vector<T>& y)
+{
+    //assert(x.size() == y.size() == xerr.size());
+    const size_t num_elem = x.size();
+    TGraphErrors g(num_elem);
+
+    for (size_t i = 0; i < num_elem; ++i) {
+        g.SetPoint(i, x[i], y[i]);
+        g.SetPointError(i, xerr[i],0);
+    }
+
+    return g;
+}
+
+template <typename T>
+TGraphErrors quickTGraphYError(const std::vector<T>& x,  const std::vector<T>& y, const std::vector<T>& yerr)
+{
+    //assert(x.size() == y.size()  == yerr.size());
+    const size_t num_elem = x.size();
+    TGraphErrors g(num_elem);
+
+    for (size_t i = 0; i < num_elem; ++i) {
+        g.SetPoint(i, x[i], y[i]);
+        g.SetPointError(i, 0, yerr[i]);
+    }
+
+    return g;
+}
+
 template <typename T, size_t X, size_t Y>
 TGraph quickTGraph(const std::vector<std::tuple<T, T, T> >& v)
 {

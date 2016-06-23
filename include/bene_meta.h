@@ -11,7 +11,7 @@
 #include <string>
 
 // Basically http://pdimov.com/cpp2/simple_cxx11_metaprogramming.html
-
+namespace bene{
 template <class T>
 using add_pointer = T*;
 template <class T>
@@ -318,3 +318,5 @@ using mp_count_if = typename mp_count_if_impl<L, P>::type;
 
 template <class L, class V>
 using mp_contains = mp_bool<mp_count<L, V>::value != 0>;
+
+}
